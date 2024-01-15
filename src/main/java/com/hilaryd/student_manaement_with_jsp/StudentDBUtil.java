@@ -14,6 +14,10 @@ public class StudentDBUtil {
         this.dataSource = dataSource;
     }
 
+    public static void addStudent(Students students) {
+
+    }
+
     public List<Students> getStudent() throws Exception {
 
         List<Students> students = new ArrayList<>();
