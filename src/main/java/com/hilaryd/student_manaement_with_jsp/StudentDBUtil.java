@@ -2,21 +2,20 @@ package com.hilaryd.student_manaement_with_jsp;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDBUtil {
-    private DataSource dataSource;
+    private static DataSource dataSource;
 
     StudentDBUtil(DataSource dataSource){
         this.dataSource = dataSource;
     }
 
-    public static void addStudent(Students students) {
 
-    }
 
     public List<Students> getStudent() throws Exception {
 
@@ -47,7 +46,7 @@ public class StudentDBUtil {
             close(connection, statement, resultSet);
         }
     }
-        private void close(Connection connection,Statement statement,ResultSet resultSet){
+        private static void close(Connection connection, Statement statement, ResultSet resultSet){
           try {
               if (connection != null){
                   connection.close();
@@ -62,5 +61,21 @@ public class StudentDBUtil {
               exception.printStackTrace();
           }
         }
+    public static void addStudent(Students students) throws Exception {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = dataSource.getConnection();
+            String sql = "INSERT INTO student" + "(first_name, last_name, email)" + "VALUES(?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, students.getFirstName());
+            preparedStatement.setString(2, students.getLastName());
+            preparedStatement.setString(3, students.getEmail());
+            preparedStatement.execute();
+        }
+        finally {
+            close(connection, preparedStatement, null);
+        }
+    }
 
 }

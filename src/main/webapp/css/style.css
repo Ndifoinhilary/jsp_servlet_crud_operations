@@ -48,13 +48,5 @@ tr:nth-child(odd) {background: #BBBBBB}
 
 #btn {
 	text-decoration: none;
-	margin: 0;
-	background: navajowhite;
-	color: #0775d3;
-	border: 1px solid transparent;
-	border-radius: 0.5px;
-	font-family: -apple-system;
-	font-size: 2px;
-	letter-spacing: 1px;
-	line-height: 1px;
+
 }
